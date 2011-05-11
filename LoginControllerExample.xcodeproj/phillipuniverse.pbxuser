@@ -2,16 +2,16 @@
 {
 	1D3623240D0F684500981E51 /* LoginControllerExampleAppDelegate.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1268, 442}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{0, 517}";
+			sepNavIntBoundsRect = "{{0, 0}, {1218, 418}}";
+			sepNavSelRange = "{375, 0}";
+			sepNavVisRange = "{0, 382}";
 		};
 	};
 	1D3623250D0F684500981E51 /* LoginControllerExampleAppDelegate.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1965, 1131}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{0, 861}";
+			sepNavIntBoundsRect = "{{0, 0}, {1965, 1508}}";
+			sepNavSelRange = "{1602, 0}";
+			sepNavVisRange = "{696, 1159}";
 		};
 	};
 	1D6058900D05DD3D006BFB54 /* LoginControllerExample */ = {
@@ -20,19 +20,38 @@
 			E7149D9C137A7E3F000C400A /* LoginControllerExample */,
 		);
 	};
-	28C286DF0D94DF7D0034E888 /* RootViewController.h */ = {
+	28A0AAE50D9B0CCF005BE974 /* LoginControllerExample_Prefix.pch */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1268, 442}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1268, 418}}";
+			sepNavSelRange = "{273, 0}";
+			sepNavVisRange = "{0, 389}";
+		};
+	};
+	28C286DF0D94DF7D0034E888 /* RootViewController.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = RootViewController.h;
+		path = "/Users/phillipuniverse/Documents/iPhone Projects/LoginControllerExample/Classes/RootViewController.h";
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1268, 418}}";
 			sepNavSelRange = "{0, 0}";
 			sepNavVisRange = "{0, 255}";
 		};
 	};
 	28C286E00D94DF7D0034E888 /* RootViewController.m */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.objc;
+		name = RootViewController.m;
+		path = "/Users/phillipuniverse/Documents/iPhone Projects/LoginControllerExample/Classes/RootViewController.m";
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavFolds = "{\n    c =     (\n                {\n            l = DetailViewController;\n            r = \"{3514, 24}\";\n            s = 1;\n        },\n                {\n            l = DetailViewController;\n            r = \"{3565, 24}\";\n            s = 1;\n        },\n                {\n            l = \"Nib name\";\n            r = \"{3615, 12}\";\n            s = 1;\n        }\n    );\n    r = \"{0, 4311}\";\n    s = 0;\n}";
 			sepNavIntBoundsRect = "{{0, 0}, {1268, 2314}}";
 			sepNavSelRange = "{277, 0}";
-			sepNavVisRange = "{0, 679}";
+			sepNavVisRange = "{0, 643}";
 		};
 	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
@@ -69,20 +88,33 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 326795594;
-			PBXWorkspaceStateSaveDate = 326795594;
+			PBXPerProjectTemplateStateSaveDate = 326796350;
+			PBXWorkspaceStateSaveDate = 326796350;
 		};
 		perUserProjectItems = {
-			E7149DA6137A7EF2000C400A /* PBXTextBookmark */ = E7149DA6137A7EF2000C400A /* PBXTextBookmark */;
-			E7149DA7137A7EF2000C400A /* PBXTextBookmark */ = E7149DA7137A7EF2000C400A /* PBXTextBookmark */;
-			E7149DA8137A7EF2000C400A /* PBXTextBookmark */ = E7149DA8137A7EF2000C400A /* PBXTextBookmark */;
-			E7149DA9137A7EF2000C400A /* PBXTextBookmark */ = E7149DA9137A7EF2000C400A /* PBXTextBookmark */;
-			E7149DAA137A7EF2000C400A /* PBXTextBookmark */ = E7149DAA137A7EF2000C400A /* PBXTextBookmark */;
-			E7149DAC137A7EF2000C400A /* PBXTextBookmark */ = E7149DAC137A7EF2000C400A /* PBXTextBookmark */;
-			E7149DBE137A820B000C400A /* PBXTextBookmark */ = E7149DBE137A820B000C400A /* PBXTextBookmark */;
+			E7149DA6137A7EF2000C400A = E7149DA6137A7EF2000C400A /* PBXTextBookmark */;
+			E7149DA7137A7EF2000C400A = E7149DA7137A7EF2000C400A /* PBXTextBookmark */;
+			E7149DA8137A7EF2000C400A = E7149DA8137A7EF2000C400A /* PBXTextBookmark */;
+			E7149DA9137A7EF2000C400A = E7149DA9137A7EF2000C400A /* PBXTextBookmark */;
+			E7149DAA137A7EF2000C400A = E7149DAA137A7EF2000C400A /* PBXTextBookmark */;
+			E7149DDD137A842E000C400A = E7149DDD137A842E000C400A /* PBXTextBookmark */;
+			E7149DDE137A842E000C400A = E7149DDE137A842E000C400A /* PlistBookmark */;
+			E7149DDF137A842E000C400A = E7149DDF137A842E000C400A /* PBXTextBookmark */;
+			E7149DE0137A842E000C400A = E7149DE0137A842E000C400A /* PBXTextBookmark */;
+			E7149E41137A84E2000C400A /* PBXTextBookmark */ = E7149E41137A84E2000C400A /* PBXTextBookmark */;
+			E7149E42137A84E2000C400A /* PBXTextBookmark */ = E7149E42137A84E2000C400A /* PBXTextBookmark */;
+			E7149E43137A84E2000C400A /* PBXBookmark */ = E7149E43137A84E2000C400A /* PBXBookmark */;
+			E7149E44137A84E2000C400A /* PBXTextBookmark */ = E7149E44137A84E2000C400A /* PBXTextBookmark */;
 		};
 		sourceControlManager = E7149DA4137A7E57000C400A /* Source Control */;
 		userBuildSettings = {
+		};
+	};
+	29B97316FDCFA39411CA2CEA /* main.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1218, 418}}";
+			sepNavSelRange = "{370, 0}";
+			sepNavVisRange = "{0, 414}";
 		};
 	};
 	E7149D9C137A7E3F000C400A /* LoginControllerExample */ = {
@@ -101,6 +133,7 @@
 		dataTipSortType = 0;
 		debuggerPlugin = GDBDebugging;
 		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
 		enableDebugStr = 1;
 		environmentEntries = (
 		);
@@ -114,9 +147,9 @@
 	};
 	E7149DA1137A7E57000C400A /* LoginController.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {938, 871}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1268, 715}}";
 			sepNavSelRange = "{197, 0}";
-			sepNavVisRange = "{100, 362}";
+			sepNavVisRange = "{0, 642}";
 		};
 	};
 	E7149DA2137A7E57000C400A /* LoginController.m */ = {
@@ -190,24 +223,101 @@
 		vrLen = 255;
 		vrLoc = 0;
 	};
-	E7149DAC137A7EF2000C400A /* PBXTextBookmark */ = {
+	E7149DDD137A842E000C400A /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */;
 		name = "RootViewController.m: 16";
 		rLen = 0;
 		rLoc = 277;
 		rType = 0;
-		vrLen = 679;
+		vrLen = 643;
 		vrLoc = 0;
 	};
-	E7149DBE137A820B000C400A /* PBXTextBookmark */ = {
+	E7149DDE137A842E000C400A /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* LoginControllerExample-Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+			NSMainNibFile,
+		);
+		name = "/Users/phillipuniverse/Documents/iPhone Projects/LoginControllerExample/LoginControllerExample-Info.plist";
+		rLen = 0;
+		rLoc = 9223372036854775808;
+	};
+	E7149DDF137A842E000C400A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28A0AAE50D9B0CCF005BE974 /* LoginControllerExample_Prefix.pch */;
+		name = "LoginControllerExample_Prefix.pch: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 350;
+		vrLoc = 0;
+	};
+	E7149DE0137A842E000C400A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28A0AAE50D9B0CCF005BE974 /* LoginControllerExample_Prefix.pch */;
+		name = "LoginControllerExample_Prefix.pch: 14";
+		rLen = 0;
+		rLoc = 354;
+		rType = 0;
+		vrLen = 389;
+		vrLoc = 0;
+	};
+	E7149E37137A8473000C400A /* GDataXMLNode.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1268, 2821}}";
+			sepNavSelRange = "{518, 0}";
+			sepNavVisRange = "{0, 1334}";
+		};
+	};
+	E7149E41137A84E2000C400A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28A0AAE50D9B0CCF005BE974 /* LoginControllerExample_Prefix.pch */;
+		name = "LoginControllerExample_Prefix.pch: 11";
+		rLen = 0;
+		rLoc = 273;
+		rType = 0;
+		vrLen = 389;
+		vrLoc = 0;
+	};
+	E7149E42137A84E2000C400A /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */;
 		name = "RootViewController.m: 16";
 		rLen = 0;
 		rLoc = 277;
 		rType = 0;
-		vrLen = 679;
+		vrLen = 643;
 		vrLoc = 0;
+	};
+	E7149E43137A84E2000C400A /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = E7149E37137A8473000C400A /* GDataXMLNode.h */;
+	};
+	E7149E44137A84E2000C400A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = E7149E37137A8473000C400A /* GDataXMLNode.h */;
+		name = "GDataXMLNode.h: 12";
+		rLen = 0;
+		rLoc = 518;
+		rType = 0;
+		vrLen = 1305;
+		vrLoc = 0;
+	};
+	E7149E5E137A8606000C400A /* UserDataViewController.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1218, 418}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 262}";
+		};
+	};
+	E7149E61137A8610000C400A /* UserDataDataSource.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1218, 418}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 254}";
+		};
 	};
 }
