@@ -15,11 +15,11 @@
 static LoginController *gLoginController = nil;
 
 @interface LoginController ()
--(void) submitLoginForm;
--(void) cancelLoginForm;
--(NSArray *) tableItems;
--(void) failedLogin;
--(void) successfulLoginWithRequest:(TTURLRequest*)request;
+- (void)submitLoginForm;
+- (void)cancelLoginForm;
+- (NSArray *)tableItems;
+- (void)failedLogin;
+- (void)successfulLoginWithRequest:(TTURLRequest*)request;
 @end
 
 @implementation LoginController
@@ -28,7 +28,7 @@ static LoginController *gLoginController = nil;
 @synthesize loginState = _loginState;
 @synthesize requestURL = _requestURL;
 
-+(LoginController *) loginController{
++ (LoginController *)loginController {
 	if(!gLoginController){
 		TTDPRINT(@"Initializing the login controller");
 		gLoginController = [[LoginController alloc] init];
@@ -37,7 +37,7 @@ static LoginController *gLoginController = nil;
 	return gLoginController;
 }
 
--(id) init {
+- (id)init {
 	if(self = [super init]){
 		_requestCount = 0;
 		_loginState = NotLoggedIn;
@@ -65,7 +65,7 @@ static LoginController *gLoginController = nil;
 	return self;
 }
 
--(void) dealloc {
+- (void)dealloc {
 	_delegate = nil;
 	gLoginController = nil;
 	self.requestURL = nil;
@@ -75,27 +75,67 @@ static LoginController *gLoginController = nil;
 /**
  *	Overwrote this to actually return the shared instance of the LoginController and NOT a new instance which will be created
  */
--(id) initWithNavigatorURL:(NSURL *)URL query:(NSDictionary *)query {
+-(id)initWithNavigatorURL:(NSURL *)URL query:(NSDictionary *)query {
 	TTDPRINT(@"Returning the shared controller");
 	return [[self class] loginController];
 }
 
 #pragma mark -
 #pragma mark Send/Parse Request
--(void) sendRequestWithURL:(NSString *)URL delegate:(id<TTURLRequestDelegate>)delegate{
+/**
+ *  There could be an instance where you just want to simply log
+ *  the user in and do nothing else.  In that case, specify
+ *  a login URL and make the userInfo some sort of special
+ *  string that denotes this is a login request
+ */
+//- (void)loginWithDelegate:(id<TTURLRequestDelegate>)delegate {
+//	[self sendRequestWithURL:LOGIN_URL delegate:delegate userInfo:nil parameters:nil];
+//}
+
+- (void)sendRequestWithURL:(NSString *)URL delegate:(id<TTURLRequestDelegate>)delegate {
+    [self sendRequestWithURL:URL delegate:delegate userInfo:nil parameters:nil];
+}
+
+- (void)sendRequestWithURL:(NSString *)URL delegate:(id<TTURLRequestDelegate>)delegate userInfo:(id)userInfo {
+    [self sendRequestWithURL:URL delegate:delegate userInfo:userInfo parameters:nil];
+}
+
+- (void)sendRequestWithURL:(NSString *)URL delegate:(id<TTURLRequestDelegate>)delegate userInfo:(id)userInfo parameters:(NSDictionary *)parameters {
 	_delegate = delegate;
 	self.requestURL = URL;
-	
+    _originalUserInfo = userInfo;
+    _originalParameters = [parameters retain];
+    
 	TTDPRINT(@"Going to user URL: %@", URL);
 	TTURLRequest *request = [TTURLRequest requestWithURL:URL delegate:self];
 	request.cachePolicy = TTURLRequestCachePolicyNone;
 	request.response = [[TTURLDataResponse alloc] init];
-	request.httpMethod = @"GET";
 	
+    request.userInfo = _originalUserInfo;
+    if(_originalParameters) {
+        request.httpMethod = @"POST";
+        [request.parameters setValuesForKeysWithDictionary:_originalParameters];
+    }
+    else {
+        request.httpMethod = @"GET";
+    }
+    
+	TTDPRINT(@"Original user info: %@ request parameters: %@", _originalParameters, request.parameters);
+    
+    /**
+     *  There could be an instance where you just want to simply log
+     *  the user in and do nothing else.  In that case, specify
+     *  a login URL and make the userInfo some sort of special
+     *  string that denotes this is a login request
+     */
+	//if ([self.requestURL isEqualToString:LOGIN_URL]) {
+	//	request.userInfo = LOGIN_REQUEST;
+	//}
+    
 	[request send];
 }
 
--(void) requestDidFinishLoad:(TTURLRequest*)request{
+- (void)requestDidFinishLoad:(TTURLRequest*)request {
 	TTURLDataResponse *response = request.response;
 	GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:response.data 
 														   options:0 error:nil];
@@ -171,24 +211,31 @@ static LoginController *gLoginController = nil;
 - (void)successfulLoginWithRequest:(TTURLRequest*)request {
 	TTDPRINT(@"I'm logged in! Hooray!");
 	
+	//Only save atvescape cookies
+	NSMutableArray *saveCookies = [NSMutableArray array];
 	for(NSHTTPCookie *cookie in [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]) {
-		TTDPRINT(@"Cookie name: %@, value: %@", cookie.name, cookie.value);
+		TTDPRINT(@"Cookie name: %@, domain: %@, value: %@", cookie.name, cookie.domain, cookie.value);
+        //Could optionally check the cookie domain here to only save specific cookies
+        TTDPRINT(@"Saving cookie: %@", cookie.name);
+        [saveCookies addObject:cookie];
 	}
-	[[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]] forKey:@"cookies"];
+	[[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:saveCookies] forKey:@"cookies"];
 	[[NSUserDefaults standardUserDefaults] setObject:_usernameField.text forKey:@"username"];
 	[[NSUserDefaults standardUserDefaults] setObject:_passwordField.text forKey:@"password"];
-	_loginState = LoggedIn;	
+	_loginState = LoggedIn;
 	
 	[[[TTNavigator navigator] visibleViewController] dismissModalViewController];
 	[_delegate requestDidFinishLoad:request];
 	_delegate = nil;
 	self.requestURL = nil;
+    _originalUserInfo = nil;
+    TT_RELEASE_SAFELY(_originalParameters);
 }
 
 /*
  *	Submits the username and password to the server
  */
--(void) submitLoginForm {
+- (void)submitLoginForm {
 	_loginState = LoggingIn;
 	_requestCount++;
 	//make sure to reload the tableview to display the TTActivityIndicatorItem
@@ -202,6 +249,16 @@ static LoginController *gLoginController = nil;
 	request.httpMethod = @"POST";
 	[request.parameters setObject:[_usernameField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] forKey:@"username"];
 	[request.parameters setObject:[_passwordField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] forKey:@"password"];
+	request.userInfo = _originalUserInfo;
+    if(_originalParameters) {
+        [request.parameters setValuesForKeysWithDictionary:_originalParameters];
+    }
+    TTDPRINT(@"Original user info: %@ request parameters: %@", _originalUserInfo, request.parameters);
+    
+	if ([self.requestURL isEqualToString:LOGIN_URL]) {
+		request.userInfo = LOGIN_REQUEST;
+	}
+	
 	[request send];
 	TTDPRINT(@"Sent the login form");
 }
@@ -209,18 +266,20 @@ static LoginController *gLoginController = nil;
 /*
  *	Treat this just like an error in the model
  */
--(void) cancelLoginForm {
+- (void)cancelLoginForm {
 	_loginState = NotLoggedIn;
 	NSError *error = [NSError errorWithDomain:@"Login" code:001 userInfo:nil];
 	[_delegate request:nil didFailLoadWithError:error];
 	[self dismissModalViewController];
 	_delegate = nil;
 	self.requestURL = nil;
+    _originalUserInfo = nil;
+    _originalParameters = nil;
 }
 
 #pragma mark -
 #pragma mark Login Form TTTableViewController
--(void) viewDidLoad {
+- (void)viewDidLoad {
 	UIBarButtonItem *loginButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(submitLoginForm)] autorelease];
 	[self.navigationItem setRightBarButtonItem:loginButton];
 	
