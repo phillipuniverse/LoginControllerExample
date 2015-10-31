@@ -1,26 +1,28 @@
-#Assumptions
-* Whatever URL you are trying to send to will be able to handle a username/password submission, as well as send back cookies (if necessary)
-* Your server is using XML to send results back
-* There is an XML element named `login_status` which has either a 1 or a 0 depending on whether or not the user is successfully logged in 
-* You are using TTNavigator (so that the login form can pop up)
-* You have something in your URLMap that maps to "tt://loginForm" and points to the LoginController class
+###Assumptions
+- Whatever URL you are trying to send to will be able to handle a username/password submission, as well as send back cookies (if necessary)
+- Your server is using XML to send results back
+- There is an XML element named `login_status` which has either a 1 or a 0 depending on whether or not the user is successfully logged in 
+- You are using TTNavigator (so that the login form can pop up)
+- You have something in your URLMap that maps to "tt://loginForm" and points to the LoginController class
 
-#Features
-* Saves successful username/password into NSUserDefaults (as `username` and `password`)
-* Saves returned cookies (if any) into NSUserDefaults (as `cookies`)
-* Shows a login form (simply username and password) with an unsuccessful login attempt (aka, `login_status == 0`)
+###Features
+- Saves successful username/password into NSUserDefaults (as `username` and `password`)
+- Saves returned cookies (if any) into NSUserDefaults (as `cookies`)
+- Shows a login form (simply username and password) with an unsuccessful login attempt (aka, `login_status == 0`)
 
-#Problems
-* Username/passsword is just sent unsecurely through POST variables.  In the future I'd like to implement some sort of OAuth or other secure communication method without using https
+###Problems
+- Username/passsword is just sent unsecurely through POST variables.  In the future I'd like to implement some sort of OAuth or other secure communication method without using https
 
-#Usage
+###Usage
 Just call:
 
+```
     [[LoginController loginController] sendRequestWithURL:@"http://domain.com/xml/data" delegate:self]
 
 	from whatever `<TTURLRequestDelegate>` needs authentication support
+```
 
-#Algorithm
+###Algorithm
 1. Some sort of `<TTURLRequestDelegate>` (could be a model to display data, or something that calls some function that requires authentication) calls the method: [[LoginController loginController] sendRequestWithURL:@"http://domain.com/xml/data/" delegate: self]
 2. The login controller sends a request to that URL
 3. If it sees `login_status == 0`:
